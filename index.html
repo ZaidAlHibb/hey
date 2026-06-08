@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>for kayla 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink-deep: #e8648a;
+    --pink-mid: #f4a0bc;
+    --pink-light: #fce4ec;
+    --pink-pale: #fff0f5;
+    --pink-blush: #ffd6e7;
+    --text-dark: #3d1a26;
+    --text-mid: #7a3a52;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    font-family: 'Caveat', cursive;
+    background: var(--pink-pale);
+  }
+  .hearts-bg {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .heart-float {
+    position: absolute;
+    animation: floatUp linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.35; }
+    90%  { opacity: 0.15; }
+    100% { transform: translateY(-10vh) rotate(20deg); opacity: 0; }
+  }
+  .slideshow { position: fixed; inset: 0; z-index: 1; }
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 40px 100px;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    pointer-events: none;
+  }
+  .slide.active { opacity: 1; pointer-events: all; }
+  .slide:nth-child(1) { background: linear-gradient(135deg,#fff0f5,#ffe4f0); }
+  .slide:nth-child(2) { background: linear-gradient(135deg,#fce4ec,#ffd6e7); }
+  .slide:nth-child(3) { background: linear-gradient(135deg,#fff0f5,#ffd6e7); }
+  .slide:nth-child(4) { background: linear-gradient(135deg,#fce4ec,#ffe0ee); }
+  .slide:nth-child(5) { background: linear-gradient(135deg,#fff0f5,#ffd6e7); }
+  .slide:nth-child(6) { background: linear-gradient(160deg,#fce4ec,#f8bbd0 45%,#f48fb1); }
+  .slide-inner {
+    max-width: 900px; width: 100%;
+    display: flex; align-items: center; gap: 56px;
+  }
+  .slide.flip .slide-inner { flex-direction: row-reverse; }
+  .polaroid {
+    flex-shrink: 0; width: 240px;
+    background: var(--white);
+    padding: 13px 13px 42px 13px;
+    box-shadow: 4px 6px 22px rgba(232,100,138,.28), 0 2px 6px rgba(0,0,0,.07);
+    transform: rotate(-3deg);
+    transition: transform .4s ease, box-shadow .4s ease;
+    position: relative;
+  }
+  .slide.flip .polaroid { transform: rotate(2.5deg); }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.05) !important;
+    box-shadow: 6px 10px 32px rgba(232,100,138,.38), 0 4px 12px rgba(0,0,0,.09);
+  }
+  .polaroid::before {
+    content:'';
+    position: absolute; top:-12px; left:50%;
+    transform: translateX(-50%) rotate(-1deg);
+    width:58px; height:20px;
+    background: rgba(255,200,220,.55);
+    border-radius: 2px;
+  }
+  .polaroid-img {
+    width: 100%; aspect-ratio: 1/1;
+    display: block; overflow: hidden;
+    background: linear-gradient(135deg,var(--pink-light),var(--pink-blush));
+  }
+  .polaroid-img img { width:100%; height:100%; object-fit:cover; display:block; }
+  .polaroid-caption {
+    text-align:center;
+    font-family:'Caveat',cursive; font-size:1rem;
+    color:var(--text-mid); padding-top:8px;
+  }
+  .slide-text { flex:1; }
+  .slide-text .label {
+    display:inline-block; font-size:.88rem; color:var(--pink-deep);
+    background:var(--white); border:1.5px solid var(--pink-mid);
+    border-radius:20px; padding:2px 14px; margin-bottom:14px; letter-spacing:.05em;
+  }
+  .slide-text h2 {
+    font-family:'DM Serif Display',serif;
+    font-size: clamp(1.7rem,4vw,2.7rem);
+    color:var(--text-dark); line-height:1.2; margin-bottom:16px;
+  }
+  .slide-text h2 em { font-style:italic; color:var(--pink-deep); }
+  .slide-text p { font-size:1.3rem; color:var(--text-mid); line-height:1.75; }
+  .slide-text p .accent { color:var(--pink-deep); font-weight:700; font-size:1.4rem; }
+  .doodle { position:absolute; pointer-events:none; opacity:.15; font-size:2rem; }
+
+  /* Final slide */
+  .final-bg-art { position:absolute; inset:0; width:100%; height:100%; }
+  .final-bg-photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; opacity:0.4;
+  }
+  .final-content { position:relative; z-index:2; text-align:center; padding:40px; }
+  .hearts-row {
+    font-size:2.4rem; margin-bottom:22px;
+    animation: heartPulse 2s ease-in-out infinite;
+  }
+  @keyframes heartPulse {
+    0%,100%{transform:scale(1)} 50%{transform:scale(1.15)}
+  }
+  .final-content h1 {
+    font-family:'DM Serif Display',serif; font-style:italic;
+    font-size:clamp(3.5rem,10vw,7rem);
+    color:var(--white); line-height:1;
+    text-shadow: 0 2px 20px rgba(232,100,138,.6), 0 4px 40px rgba(200,50,100,.3);
+    margin-bottom:20px;
+  }
+  .final-content h1 span {
+    display:block; font-size:.45em;
+    font-family:'Caveat',cursive; font-style:normal;
+    color:rgba(255,255,255,.82); letter-spacing:.22em;
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .final-content .signature {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:1.35rem; color:rgba(255,255,255,.7);
+  }
+
+  /* Nav */
+  .nav {
+    position: fixed; bottom: 32px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .nav-btn {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 2px solid rgba(232,100,138,.5);
+    background: rgba(255,255,255,.7);
+    backdrop-filter: blur(8px);
+    color: var(--pink-deep); font-size: 1.3rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .25s ease;
+    box-shadow: 0 2px 12px rgba(232,100,138,.2);
+  }
+  .nav-btn:hover {
+    background: var(--pink-deep); color: white;
+    border-color: var(--pink-deep); transform: scale(1.1);
+    box-shadow: 0 4px 18px rgba(232,100,138,.4);
+  }
+  .nav-btn:disabled { opacity: .3; cursor: default; transform: none; }
+  .nav-dots { display: flex; gap: 8px; align-items: center; }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(232,100,138,.3);
+    transition: all .3s ease; cursor: pointer;
+  }
+  .dot.active {
+    background: var(--pink-deep); transform: scale(1.3);
+    box-shadow: 0 0 6px rgba(232,100,138,.5);
+  }
+  .nav-counter {
+    font-family:'Caveat',cursive; font-size:1rem;
+    color:var(--text-mid); min-width:40px; text-align:center;
+  }
+  @media (max-width:640px) {
+    .slide-inner { flex-direction:column !important; gap:28px; }
+    .polaroid { width:190px; }
+    .slide { padding:50px 24px 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts-bg" id="heartsBg"></div>
+
+<div class="slideshow" id="slideshow">
+
+  <!-- SLIDE 1 -->
+  <section class="slide active" id="s1">
+    <span class="doodle" style="top:10%;right:8%">✿</span>
+    <span class="doodle" style="bottom:14%;left:6%">❀</span>
+    <div class="slide-inner">
+      <div class="polaroid">
+        <div class="polaroid-img">
+          <img src="1.jpg" alt="">
+        </div>
+        <div class="polaroid-caption">hey you!!! </div> 
+      </div>
+      <div class="slide-text">
+        <span class="label">slide 01 ✉️</span>
+        <h2>HEY <em>YOU!</em></h2>
+        <p>YES <span class="accent">YOUUU!</span><br>I'm talking to you...<br>yes you! Kayla!</span> :D</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 -->
+  <section class="slide flip" id="s2">
+    <span class="doodle" style="top:15%;left:5%">♡</span>
+    <span class="doodle" style="bottom:10%;right:7%">✿</span>
+    <div class="slide-inner">
+      <div class="polaroid">
+        <div class="polaroid-img">
+          <img src="3.jpg" alt="">
+        </div>
+        <div class="polaroid-caption">always & forever 💓</div>
+      </div>
+      <div class="slide-text">
+        <span class="label">slide 02</span>
+        <h2>no matter <em>what</em></h2>
+        <p>no matter what you act like,<br><span class="accent">I will always love you with all my heart!!</span> 💕</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 -->
+  <section class="slide" id="s3">
+    <span class="doodle" style="top:8%;right:10%">✧</span>
+    <span class="doodle" style="bottom:15%;left:8%">♡</span>
+    <div class="slide-inner">
+      <div class="polaroid">
+        <div class="polaroid-img">
+          <img src="66.jpg" alt="">
+        </div>
+        <div class="polaroid-caption">T^T</div>
+      </div>
+      <div class="slide-text">
+        <span class="label">slide 03</span>
+        <h2>and and and and i <em>don't know</em> how...</h2>
+        <p>aosdhaiushd i don't know<br>how to chat you properly either lately... <span class="accent">T^T</span><br>But later I won't bother you anymore,<br> I'll wait for you to come back when you feel better to chat with me.</p>  
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 -->
+  <section class="slide flip" id="s4">
+    <span class="doodle" style="top:12%;left:6%">✿</span>
+    <span class="doodle" style="bottom:8%;right:9%">❀</span>
+    <div class="slide-inner">
+      <div class="polaroid">
+        <div class="polaroid-img">
+          <img src="2.jpg" alt="">
+        </div>
+        <div class="polaroid-caption">take care!! 🌷</div>
+      </div>
+      <div class="slide-text">
+        <span class="label">slide 04 🌸</span>
+        <h2>BUTTT!! don't forget to <em>live well!</em></h2>
+        <p>Don't forget to <span class="accent">eat enough</span>,<br>stay <span class="accent">hydrated</span>, and<br>get plenty of <span class="accent">rest!</span> </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 -->
+  <section class="slide" id="s5">
+    <span class="doodle" style="top:10%;right:6%">♡</span>
+    <span class="doodle" style="bottom:12%;left:10%">✿</span>
+    <div class="slide-inner">
+      <div class="polaroid">
+        <div class="polaroid-img">
+          <img src="4.jpg" alt="">
+        </div>
+        <div class="polaroid-caption">from me to you 💌</div>
+      </div>
+      <div class="slide-text">
+        <span class="label">slide 05 💕</span>
+        <h2>because ya keep teeling me about <em> dont know how to love me</em></h2>
+        <p>anddd you don't have to<br>love me back when i love you</span> <span style="font-size:1.5rem">♡</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: FINAL -->
+  <section class="slide" id="s6">
+    <img class="final-bg-photo" src="5.png" alt="">
+    <svg class="final-bg-art" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <text x="-20" y="200" font-size="180" fill="#e8648a" opacity=".08">♡</text>
+      <text x="900" y="120" font-size="220" fill="#f48fb1" opacity=".07">♡</text>
+      <text x="300" y="750" font-size="160" fill="#e8648a" opacity=".06">♡</text>
+      <text x="700" y="780" font-size="200" fill="#f48fb1" opacity=".07">♡</text>
+      <text x="80" y="80" font-size="40" fill="#f48fb1" opacity=".15">♡</text>
+      <text x="1100" y="300" font-size="35" fill="#e8648a" opacity=".12">♡</text>
+      <text x="150" y="300" font-size="30" fill="white" opacity=".12">✦</text>
+      <text x="1000" y="200" font-size="24" fill="white" opacity=".1">✦</text>
+      <circle cx="100" cy="600" r="120" fill="#f8bbd0" opacity=".07"/>
+      <circle cx="1100" cy="100" r="150" fill="#f48fb1" opacity=".06"/>
+    </svg>
+    <div class="final-content">
+      <div class="hearts-row">💕</div>
+      <h1><span>always,</span>love you</h1>
+      <p class="signature">— last message before i stop bothering you for now</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn" id="btnPrev" onclick="changeSlide(-1)" disabled>←</button>
+  <div class="nav-dots" id="dots"></div>
+  <span class="nav-counter" id="counter">1 / 6</span>
+  <button class="nav-btn" id="btnNext" onclick="changeSlide(1)">→</button>
+</nav>
+
+<script>
+  const hb = document.getElementById('heartsBg');
+  const syms = ['♡','♥','💕','💗','💓','🌸','✿','✦'];
+  for(let i=0;i<22;i++){
+    const h=document.createElement('span');
+    h.className='heart-float';
+    h.textContent=syms[Math.floor(Math.random()*syms.length)];
+    h.style.left=Math.random()*100+'%';
+    h.style.animationDuration=(8+Math.random()*14)+'s';
+    h.style.animationDelay=(Math.random()*12)+'s';
+    h.style.fontSize=(0.8+Math.random()*1.2)+'rem';
+    h.style.color=['#e8648a','#f48fb1','#f8bbd0','#f06292'][Math.floor(Math.random()*4)];
+    hb.appendChild(h);
+  }
+
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const total = slides.length;
+  let current = 0;
+
+  slides.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.onclick=()=>goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(idx){
+    slides[current].classList.remove('active');
+    dotsEl.children[current].classList.remove('active');
+    current=idx;
+    slides[current].classList.add('active');
+    dotsEl.children[current].classList.add('active');
+    counter.textContent=(current+1)+' / '+total;
+    btnPrev.disabled=current===0;
+    btnNext.disabled=current===total-1;
+  }
+
+  function changeSlide(dir){ goTo(current+dir); }
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'&&current<total-1) changeSlide(1);
+    if(e.key==='ArrowLeft'&&current>0) changeSlide(-1);
+  });
+
+  let tx=0;
+  document.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; },{passive:true});
+  document.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    if(dx<-50&&current<total-1) changeSlide(1);
+    if(dx>50&&current>0) changeSlide(-1);
+  },{passive:true});
+</script>
+</body>
+</html>
